@@ -7,6 +7,7 @@ class App extends Component {
         <p>{this.props.display('hello')}, {this.props.display('welcome', 'username')}</p>
         <p>{this.props.display('haveApple', 'username', 3)}</p>
         <p>{this.props.display('testKey')}</p>
+        <button id="toHans">HANS</button>
       </div>
     );
   }

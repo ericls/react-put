@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 function connectDisplay(options = {}) {
   let { notFound, displayFunctionName } = options;
-  const { mapPropStateToDictionary, dictionary } = options;
+  const { mapPropToDictionary, dictionary } = options;
   notFound = notFound || (key => `$$${key}`);
   displayFunctionName = displayFunctionName || 'display';
   return (ReactComponent) => {
@@ -10,8 +10,12 @@ function connectDisplay(options = {}) {
       constructor(props) {
         super(props);
         this.getDictionary = () => {
-          if (mapPropStateToDictionary) {
-            return Object.assign({}, dictionary, mapPropStateToDictionary(this.props, this.states));
+          if (mapPropToDictionary) {
+            return Object.assign(
+              {},
+              dictionary,
+              mapPropToDictionary(this.props || {}),
+            );
           }
           return dictionary || {};
         };
