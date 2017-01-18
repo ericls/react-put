@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
 import App from './App';
 import ReduxApp from './ReduxApp';
-import connectDisplay from '../es';
+import connectPut from '../es';
 
 describe('<App />', () => {
   describe('connect with basic dictionary', () => {
@@ -15,11 +15,11 @@ describe('<App />', () => {
         haveApple: (name, amount) => `${name} has ${amount} ${amount === 1 ? 'apple' : 'apples'}`,
       },
     };
-    const Component = connectDisplay(options)(App);
+    const Component = connectPut(options)(App);
     const wrapper = shallow(<Component />);
-    it('Should have display in props', () => {
-      const display = wrapper.prop('display');
-      expect(display).to.be.a('function');
+    it('Should have put in props', () => {
+      const put = wrapper.prop('put');
+      expect(put).to.be.a('function');
     });
     it('Should correctly display strings', () => {
       const html = wrapper.html();
@@ -36,7 +36,7 @@ describe('<App />', () => {
       },
       mapPropToDictionary: props => Object.assign({}, props),
     };
-    const Component = connectDisplay(options)(App);
+    const Component = connectPut(options)(App);
     const wrapper = shallow(<Component testKey={'someValue'} hello={'hello'} />);
     it('Should correctly display strings', () => {
       const html = wrapper.html();

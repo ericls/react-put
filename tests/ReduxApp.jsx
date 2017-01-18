@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { createStore, combineReducers } from 'redux';
 import { connect, Provider } from 'react-redux';
-import connectDisplay from '../es';
+import connectPut from '../es';
 
 const EN = {
   hello: 'Hello',
@@ -40,9 +40,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <p>{this.props.display('hello')}, {this.props.display('welcome', 'username')}</p>
-        <p>{this.props.display('haveApple', 'username', 3)}</p>
-        <p>{this.props.display('testKey')}</p>
+        <p>{this.props.put('hello')}, {this.props.put('welcome', 'username')}</p>
+        <p>{this.props.put('haveApple', 'username', 3)}</p>
+        <p>{this.props.put('testKey')}</p>
         <button id="toHans" onClick={this.clickHans}>HANS</button>
       </div>
     );
@@ -50,7 +50,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  display: React.PropTypes.func.isRequired,
+  put: React.PropTypes.func.isRequired,
   dispatch: React.PropTypes.func.isRequired,
 };
 
@@ -59,7 +59,7 @@ let ConnectedApp;
 const options = {
   mapPropToDictionary: props => Object.assign({}, props.dictionary),
 };
-ConnectedApp = connectDisplay(options)(App);
+ConnectedApp = connectPut(options)(App);
 ConnectedApp = connect(mapStateToProps)(ConnectedApp);
 
 

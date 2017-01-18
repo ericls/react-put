@@ -1,7 +1,7 @@
 {
-  "name": "react-display",
+  "name": "react-put",
   "version": "0.0.1",
-  "description": "Give React Components a prop that displays things",
+  "description": "A flexible formatter for React. This library provides an easy to use i18n interface for React.",
   "main": "index.js",
   "scripts": {
     "prepublish": "npm run build",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ericls/react-display.git"
+    "url": "git+https://github.com/ericls/react-put.git"
   },
   "keywords": [
     "react",
@@ -22,9 +22,9 @@
   "author": "Shen Li <dustet@gmail.com> (https://shenli.me)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ericls/react-display/issues"
+    "url": "https://github.com/ericls/react-put/issues"
   },
-  "homepage": "https://github.com/ericls/react-display#readme",
+  "homepage": "https://github.com/ericls/react-put#readme",
   "devDependencies": {
     "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
