@@ -3,10 +3,17 @@
 [![codecov](https://codecov.io/gh/ericls/react-put/branch/master/graph/badge.svg)](https://codecov.io/gh/ericls/react-put)
 
 
-> A package that displays things in react components.
+> A package that displays things in react components. Suitable for formatting and i18n.
 
+[Interactive Demo](https://runkit.com/ericls/runkit-npm-react-put)
 
-This package works by injecting a function (by default called `put`) into the props of a a connected react component. The injected function takes a `key` and optional context and returns something else (usually a string). Suitable for formatting and i18n.
+This package works by injecting a function (by default called `put`) into the props of a a connected react component. The injected function takes a `key` and optional context and returns something else (usually a string).
+
+## Install
+
+```bash
+npm i --save react-put
+```
 
 ## Examples:
 
