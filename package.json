@@ -6,6 +6,7 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "./node_modules/.bin/babel es/index.js --out-file index.js",
+    "cover": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --compilers js:babel-core/register tests/index.js",
     "test": "./node_modules/.bin/mocha --require babel-register tests/index.js"
   },
   "repository": {
@@ -40,7 +41,6 @@
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
-    "jest": "^18.1.0",
     "jsdom": "9.9.1",
     "jsdom-global": "2.1.1",
     "mocha": "^3.2.0",
@@ -48,9 +48,7 @@
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^0.14.0 || ^15.0.0",
     "react-redux": "^5.0.2",
-    "react-test-renderer": "^15.4.2",
-    "redux": "^3.6.0",
-    "webpack": "^1.14.0"
+    "redux": "^3.6.0"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.0"
