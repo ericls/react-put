@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-function connectDisplay(options = {}) {
-  let { notFound, displayFunctionName } = options;
+function connectPut(options = {}) {
+  let { notFound, putFunctionName } = options;
   const { mapPropToDictionary, dictionary } = options;
   notFound = notFound || (key => `$$${key}`);
-  displayFunctionName = displayFunctionName || 'display';
+  putFunctionName = putFunctionName || 'put';
   return (ReactComponent) => {
-    class Display extends Component {
+    class Put extends Component {
       constructor(props) {
         super(props);
         this.getDictionary = () => {
@@ -19,7 +19,7 @@ function connectDisplay(options = {}) {
           }
           return dictionary || {};
         };
-        this.display = (key, ...context) => {
+        this.put = (key, ...context) => {
           const formatter = this.getDictionary()[key];
           if (formatter) {
             if (formatter instanceof Function) {
@@ -31,12 +31,12 @@ function connectDisplay(options = {}) {
         };
       }
       render() {
-        const injectedProps = { [displayFunctionName]: this.display };
+        const injectedProps = { [putFunctionName]: this.put };
         return <ReactComponent {...this.props} {...this.state} {...injectedProps} />;
       }
     }
-    return Display;
+    return Put;
   };
 }
 
-export default connectDisplay;
+export default connectPut;

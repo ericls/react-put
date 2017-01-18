@@ -1,27 +1,27 @@
-# react-display
-[![Build Status](https://travis-ci.org/ericls/react-display.svg?branch=master)](https://travis-ci.org/ericls/react-display)
-[![codecov](https://codecov.io/gh/ericls/react-display/branch/master/graph/badge.svg)](https://codecov.io/gh/ericls/react-display)
+# react-put
+[![Build Status](https://travis-ci.org/ericls/react-put.svg?branch=master)](https://travis-ci.org/ericls/react-put)
+[![codecov](https://codecov.io/gh/ericls/react-put/branch/master/graph/badge.svg)](https://codecov.io/gh/ericls/react-put)
 
 
 > A package that displays things in react components.
 
 
-This package works by injecting a function (by default called `display`) into the props of a a connected react component. The injected function takes a `key` and optional context and returns something else (usually a string). Suitable for formatting and i18n.
+This package works by injecting a function (by default called `put`) into the props of a a connected react component. The injected function takes a `key` and optional context and returns something else (usually a string). Suitable for formatting and i18n.
 
 ## Examples:
 
 The basic usage:
 ```javascript
 // App.js
-import connectDisplay from "react-display"
+import connectPut from "react-put"
 
 class App extends Component {
   render() {
     return (
       <div>
-        <p>{this.props.display('hello')}, {this.props.display('welcome', 'username')}</p>
-        <p>{this.props.display('haveApple', 'username', 3)}</p>
-        <p>{this.props.display('testKey')}</p>
+        <p>{this.props.put('hello')}, {this.props.put('welcome', 'username')}</p>
+        <p>{this.props.put('haveApple', 'username', 3)}</p>
+        <p>{this.props.put('testKey')}</p>
       </div>
     );
   }
@@ -34,7 +34,7 @@ const options = {
   },
   mapPropToDictionary: props => props, // You can do something wild with this option
 };
-export default connectDisplay(options)(App);
+export default connectPut(options)(App);
 
 // test.js
 import App from './App';
@@ -67,9 +67,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <p>{this.props.display('hello')}, {this.props.display('welcome', 'username')}</p>
-        <p>{this.props.display('haveApple', 'username', 3)}</p>
-        <p>{this.props.display('testKey')}</p>
+        <p>{this.props.put('hello')}, {this.props.put('welcome', 'username')}</p>
+        <p>{this.props.put('haveApple', 'username', 3)}</p>
+        <p>{this.props.put('testKey')}</p>
         <button onClick={this.changeLanguage}>Change Language</button>
       </div>
     );
@@ -79,24 +79,24 @@ const options = {
   mapPropToDictionary: props => Object.assign({}, props.dictionary),
 };
 const mapStateToProps = state => Object.assign({}, { dictionary: state.dictionary });
-ConnectedApp = connectDisplay(options)(App);
+ConnectedApp = connectPut(options)(App);
 ConnectedApp = connect(mapStateToProps)(ConnectedApp);
 ```
 
 ## Guide:
 
-This package exposes a single function `connectDisplay` and is the default export of the package.
+This package exposes a single function `connectPut` and is the default export of the package.
 
-### connectDisplay():
+### connectPut():
 
 ```javascript
 type Options = {
   dictionary?: Object,
   mapPropToDictionary?: (props: Object) => Object,
-  displayFunctionName?: string,
+  putFunctionName?: string,
   notFound?: (key: string) => any
 }
-connectDisplay(options: Options)(Component) => Component
+connectPut(options: Options)(Component) => Component
 ```
 
 
@@ -109,15 +109,15 @@ There are 4 optional keys in the options.
 | dictionary  | An object directly used by the injected function  |
 | mapPropToDictionary  | A function that takes `props` of a component and returns an object that updates `dictionary`  |
 | notFound  | A function that takes `key`, if (!(key in dictionary)), and returns something to display. (Defaults to key => \`$$${key}\`)  |
-| displayFunctionName  | A string that specifies the injected prop name. (Defaults to `display`)  |
+| putFunctionName  | A string that specifies the injected prop name. (Defaults to `put`)  |
 
 
-### display():
+### put():
 
-The connected component will have a new props, which by default is called `display`.
+The connected component will have a new props, which by default is called `put`.
 
 ```javascript
-display(key, ...context) => any
+put(key, ...context) => any
 ```
 
 This function looks up the `key` in dictionary and returns something to return accordingly.
