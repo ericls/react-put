@@ -9,18 +9,21 @@ function connectPut(options = {}) {
     class Put extends Component {
       constructor(props) {
         super(props);
-        this.getDictionary = () => {
+        this.getDictionary = (_props) => {
           if (mapPropToDictionary) {
             return Object.assign(
               {},
               dictionary,
-              mapPropToDictionary(this.props || {}),
+              mapPropToDictionary(_props || {}),
             );
           }
           return dictionary || {};
         };
+        this.state = {
+          dictionary: this.getDictionary(this.props),
+        };
         this.put = (key, ...context) => {
-          const formatter = this.getDictionary()[key];
+          const formatter = this.state.dictionary[key];
           if (formatter) {
             if (formatter instanceof Function) {
               return formatter(...context);
@@ -29,6 +32,11 @@ function connectPut(options = {}) {
           }
           return notFound(key);
         };
+      }
+      componentWillReceiveProps(props) {
+        if (mapPropToDictionary) {
+          this.setState({ dictionary: this.getDictionary(props) });
+        }
       }
       render() {
         const injectedProps = { [putFunctionName]: this.put };
