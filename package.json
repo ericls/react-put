@@ -1,6 +1,6 @@
 {
   "name": "react-put",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A flexible formatter for React. This library provides an easy to use i18n interface for React.",
   "main": "index.js",
   "scripts": {
