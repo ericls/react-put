@@ -59,4 +59,36 @@ describe('<App />', () => {
       expect(text).to.have.string('一些值');
     });
   });
+  describe('functional component, custom putFunctionName and notFound options', () => {
+    const options = {
+      dictionary: {
+        hello: '你好',
+        welcome: name => `欢迎${name}`,
+        haveApple: (name, amount) => `${name} has ${amount} ${amount === 1 ? 'apple' : 'apples'}`,
+      },
+      putFunctionName: 'translate',
+      notFound: key => `a wild ${key}`,
+    };
+    const TestApp = (props) => {
+      const translate = props.translate;
+      return (
+        <div>
+          <p>{translate('hello')}, {translate('welcome', 'username')}</p>
+          <p>{translate('haveApple', 'username', 3)}</p>
+          <p>{translate('testKey')}</p>
+        </div>
+      );
+    };
+    TestApp.propTypes = {
+      translate: React.PropTypes.func.isRequired,
+    };
+    const Component = connectPut(options)(TestApp);
+    const wrapper = shallow(<Component />);
+    it('Should correctly display strings', () => {
+      const html = wrapper.html();
+      expect(html).to.have.string('你好, 欢迎username');
+      expect(html).to.have.string('username has 3 apples');
+      expect(html).to.have.string('a wild testKey');
+    });
+  });
 });
