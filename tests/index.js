@@ -91,4 +91,11 @@ describe('<App />', () => {
       expect(html).to.have.string('a wild testKey');
     });
   });
+  describe('Should work with static properties', () => {
+    it('Should contain static properties from connected Component', (done) => {
+      const Component = connectPut({})(App);
+      expect(Component.something).to.deep.equal({ a: 1 });
+      done();
+    });
+  });
 });

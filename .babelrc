@@ -1,6 +1,7 @@
 {
-  "presets": ["es2015", "es2016", "react"],
+  "presets": ["es2015", "es2016", "react", "stage-2"],
   "plugins": [
-    "add-module-exports"
+    "add-module-exports",
+    "transform-object-assign"
   ]
 }

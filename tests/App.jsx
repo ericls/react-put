@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 class App extends Component {
+  static something = {
+    a: 1
+  }
   render() {
     return (
       <div>
