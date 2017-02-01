@@ -11,11 +11,7 @@ function connectPut(options = {}) {
         super(props);
         this.getDictionary = (_props) => {
           if (mapPropToDictionary) {
-            return Object.assign(
-              {},
-              dictionary,
-              mapPropToDictionary(_props || {}),
-            );
+            return { ...dictionary, ...mapPropToDictionary(_props || {}) };
           }
           return dictionary || {};
         };
@@ -43,7 +39,7 @@ function connectPut(options = {}) {
         return <ReactComponent {...this.props} {...this.state} {...injectedProps} />;
       }
     }
-    return Put;
+    return Object.assign(Put, ReactComponent);
   };
 }
 
