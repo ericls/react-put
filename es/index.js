@@ -1,5 +1,27 @@
 import React, { Component } from 'react';
 
+function cloneStatic(target, source) {
+  const blackList = [ // from 'hoist-non-react-statics'
+    'childContextTypes',
+    'contextTypes',
+    'defaultProps',
+    'displayName',
+    'getDefaultProps',
+    'mixins',
+    'propTypes',
+    'type',
+    'name',
+    'length',
+    'prototype',
+    'caller',
+    'arguments',
+    'arity',
+  ];
+  const keys = Object.keys(source).filter(k => blackList.indexOf(k) === -1);
+  const filteredSource = keys.reduce((acc, k) => ({ ...acc, [k]: source[k] }), {});
+  return Object.assign(target, filteredSource);
+}
+
 function connectPut(options = {}) {
   let { notFound, putFunctionName } = options;
   const { mapPropToDictionary, dictionary } = options;
@@ -39,7 +61,7 @@ function connectPut(options = {}) {
         return <ReactComponent {...this.props} {...this.state} {...injectedProps} />;
       }
     }
-    return Object.assign(Put, ReactComponent);
+    return cloneStatic(Put, ReactComponent);
   };
 }
 
