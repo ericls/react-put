@@ -97,5 +97,10 @@ describe('<App />', () => {
       expect(Component.something).to.deep.equal({ a: 1 });
       done();
     });
+    it('Should not contain certain blacklisted properties', (done) => {
+      const Component = connectPut({})(App);
+      expect(Component).to.not.have.property('propTypes');
+      done();
+    });
   });
 });
